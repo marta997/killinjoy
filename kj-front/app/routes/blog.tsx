@@ -1,7 +1,7 @@
 import Footer from "../components/Footer"
 import LinkButton from "../components/LinkButton"
 import Logo from "../components/Logo"
-// import Articles from "../components/Articles"
+import Articles from "../components/Articles"
 // import AddButton from "../components/AddButton"
 
 export default function BlogPage() {
@@ -12,7 +12,7 @@ export default function BlogPage() {
           <Logo />
           {/* <AddButton /> */}
         </div>
-        {/* <Articles /> */}
+        <Articles />
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <LinkButton text="Back" href="/" />
         </div>
