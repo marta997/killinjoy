@@ -14,6 +14,15 @@ type Article = {
   category: Category
 }
 
+type CategoryProps = {
+  category?: Category
+}
+
+const Category = ({ category }: CategoryProps) => {
+  const bgColor = category && `bg-[${category.color}]` || "bg-[#fff]"
+  return <div className={`m-2 col-span-1 border-1 border-solid rounded-xl ${bgColor}`} />
+}
+
 const Articles = () => {
   const [articles, setArticles] = useState<Article[]>([])
   const [categories, setCategories] = useState<Category[]>([])
@@ -57,9 +66,7 @@ const Articles = () => {
           <div className="p-2 col-span-7">
             {article.title}
           </div>
-          <div className="m-2 col-span-1 border-1 border-solid rounded-xl"
-            style={{ backgroundColor: category && category.color || "white" }}
-          />
+          <Category category={category} />
         </div>
         <div className="m-2 p-2 max-w-120 border-2 border-solid">
           {article.body} {textaco}
