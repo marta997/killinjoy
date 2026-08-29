@@ -1,42 +1,25 @@
 import { useEffect, useState } from "react"
 import { textaco } from "../lib/data"
 
-type Category = {
-  id: string
-  name: string
-  color: string
-}
+import type TCategory from "~/types/Category"
+import type TArticle from "~/types/Article"
+import Article from "./Article"
 
-type Article = {
-  id: string
-  title: string
-  body: string
-  category: Category
-}
-
-type CategoryProps = {
-  category?: Category
-}
-
-const Category = ({ category }: CategoryProps) => {
-  const bgColor = category && `bg-[${category.color}]` || "bg-[#fff]"
-  return <div className={`m-2 col-span-1 border-1 border-solid rounded-xl ${bgColor}`} />
-}
 
 const Articles = () => {
-  const [articles, setArticles] = useState<Article[]>([])
-  const [categories, setCategories] = useState<Category[]>([])
+  const [articles, setArticles] = useState<TArticle[]>([])
+  const [categories, setCategories] = useState<TCategory[]>([])
   const [loading, setLoading] = useState(true)
 
   const fetchArticles = async () => {
     const response = await fetch("http://localhost:8000/api/article")
-    const articles: Article[] = await response.json()
+    const articles: TArticle[] = await response.json()
     setArticles(articles)
   }
 
   const fetchCategories = async () => {
     const response = await fetch("http://localhost:8000/api/category")
-    const categories: Category[] = await response.json()
+    const categories: TCategory[] = await response.json()
     setCategories(categories)
   }
 
@@ -60,18 +43,12 @@ const Articles = () => {
 
   return loading ? "Loading..." : <div>
     {articles.map((article, index) => {
-      let category = categories.find(cat => cat.id === article.category.id)
-      return <div key={index} className="m-8">
-        <div className="m-2 max-w-120 border-2 border-solid grid grid-cols-8 gap-4">
-          <div className="p-2 col-span-7">
-            {article.title}
-          </div>
-          <Category category={category} />
-        </div>
-        <div className="m-2 p-2 max-w-120 border-2 border-solid">
-          {article.body} {textaco}
-        </div>
-      </div>
+      let category = categories.find(cat => cat.id === article.category)
+      return <Article
+        key={index}
+        article={article}
+        category={category}
+      />
     })
     }
   </div>
