@@ -1,3 +1,4 @@
+import { Theme } from "@radix-ui/themes";
 import {
   isRouteErrorResponse,
   Links,
@@ -33,7 +34,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <Theme appearance="dark">
+          {children}
+        </Theme>
         <ScrollRestoration />
         <Scripts />
       </body>
