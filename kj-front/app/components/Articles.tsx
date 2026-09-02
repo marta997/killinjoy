@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { textaco } from "../lib/data"
 
 import type TCategory from "~/types/Category"
 import type TArticle from "~/types/Article"
 import Article from "./Article"
+import Loading from "./Loading"
 
 
 const Articles = () => {
@@ -41,7 +41,7 @@ const Articles = () => {
     fetchData()
   }, [])
 
-  return loading ? "Loading..." : <div>
+  return loading ? <Loading /> : <div>
     {articles.map((article, index) => {
       let category = categories.find(cat => cat.id === article.category)
       return <Article
