@@ -4,6 +4,7 @@ import type TArticle from "~/types/Article"
 import type TCategory from "~/types/Category"
 
 import { textaco } from "../lib/data"
+import { Box, ScrollArea } from "@radix-ui/themes"
 
 type TArticleProps = {
     article: TArticle
@@ -11,7 +12,6 @@ type TArticleProps = {
 }
 
 const Article = ({ article, category }: TArticleProps) => {
-
 
     return <div className="m-8">
         <div className="m-2 max-w-120 border-2 border-solid grid grid-cols-8 gap-4">
@@ -21,7 +21,12 @@ const Article = ({ article, category }: TArticleProps) => {
             {category && <Category category={category} />}
         </div>
         <div className="m-2 p-2 max-w-120 border-2 border-solid">
-            {article.body} {textaco}
+            <ScrollArea type="always" scrollbars="vertical" style={{ height: 180 }}>
+                <Box p="2" pr="8">
+                    {article.body} {textaco}
+                </Box>
+            </ScrollArea>
+
         </div>
     </div>
 }
