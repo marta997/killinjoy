@@ -13,7 +13,7 @@ const LinkButton = ({ text, href }: LinkButonProps) => {
   const handleClick = () => {
     navigate(href)
   }
-  return <Button size="2" variant="soft" color="orange" onClick={handleClick}>
+  return <Button size="2" variant="surface" onClick={handleClick}>
     {text}
   </Button>
 }
